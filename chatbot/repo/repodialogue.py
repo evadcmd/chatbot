@@ -3,8 +3,6 @@ from sqlalchemy import delete, select
 from chatbot.db import async_session
 from chatbot.model import dialogue
 
-# from sqlalchemy.orm import selectinload
-
 
 async def find_all() -> list[dialogue.Model]:
     async with async_session() as session:
