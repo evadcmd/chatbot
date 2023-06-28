@@ -1,31 +1,31 @@
 from fastapi import APIRouter
 
 from chatbot.model import bot
-from chatbot.repo import botrepo
+from chatbot.repo import repobot
 
 router = APIRouter(prefix="/bot", tags=["bot"])
 
 
-@router.get("/")
+@router.get("")
 async def find_all() -> list[bot.Model]:
-    return await botrepo.find_all()
+    return await repobot.find_all()
 
 
 @router.get("/{bot_id}")
 async def find_by_id(bot_id: int) -> bot.Model | None:
-    return await botrepo.find_by_id(bot_id)
+    return await repobot.find_by_id(bot_id)
 
 
-@router.post("/")
+@router.post("")
 async def add_one(bot: bot.Model) -> None:
-    await botrepo.add(bot)
+    await repobot.add(bot)
 
 
-@router.put("/")
+@router.put("")
 async def update_one(bot: bot.Model) -> None:
-    await botrepo.update_one(bot)
+    await repobot.update_one(bot)
 
 
 @router.delete("/{bot_id}")
 async def remove_one(bot_id: int) -> None:
-    await botrepo.rm_by_id_in(bot_id)
+    await repobot.rm_by_id_in(bot_id)

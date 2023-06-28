@@ -4,21 +4,23 @@ from pydantic import BaseModel
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column  # , relationship
 
-from chatbot.model import BaseSchema  # , msgbot, msguser
+from chatbot.model import BaseSchema  # , dialogue
 
 
 class Schema(BaseSchema):
-    __tablename__ = "dialogue"
+    __tablename__ = "msg_bot"
     id: Mapped[int] = mapped_column(primary_key=True)
-    user_id: Mapped[int] = mapped_column(ForeignKey("user.id"))
-    bot_id: Mapped[int] = mapped_column(ForeignKey("bot.id"))
+    dialogue_id: Mapped[int] = mapped_column(ForeignKey("dialogue.id"))
+    req_id: Mapped[int]
+    content: Mapped[str]
     timestamp: Mapped[datetime] = mapped_column(default=datetime.utcnow)
 
 
 class Model(BaseModel):
     id: int | None
-    user_id: int
-    bot_id: int
+    dialogue_id: int
+    req_id: int
+    content: str
     timestamp: datetime | None
 
     class Config:

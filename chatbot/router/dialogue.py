@@ -1,26 +1,26 @@
 from fastapi import APIRouter
 
 from chatbot.model import dialogue
-from chatbot.repo import dialoguerepo
+from chatbot.repo import repodialogue
 
 router = APIRouter(prefix="/dialogue", tags=["dialogue"])
 
 
-@router.get("/")
+@router.get("")
 async def find_all() -> list[dialogue.Model]:
-    return await dialoguerepo.find_all()
+    return await repodialogue.find_all()
 
 
 @router.get("/{dialogue_id}")
 async def find_by_id(dialogue_id: int) -> dialogue.Model | None:
-    return await dialoguerepo.find_by_id(dialogue_id)
+    return await repodialogue.find_by_id(dialogue_id)
 
 
-@router.post("/")
+@router.post("")
 async def add_one(dialogue: dialogue.Model) -> None:
-    await dialoguerepo.add(dialogue)
+    await repodialogue.add(dialogue)
 
 
 @router.delete("/{dialogue_id}")
 async def remove_one(dialogue_id: int) -> None:
-    await dialoguerepo.rm_by_id_in(dialogue_id)
+    await repodialogue.rm_by_id_in(dialogue_id)
